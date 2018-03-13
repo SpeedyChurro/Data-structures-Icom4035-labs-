@@ -1,5 +1,7 @@
 package indexList;
 
+import java.lang.reflect.Array;
+
 import linkedLists.LinkedList;
 import linkedLists.Node;
 
@@ -16,7 +18,7 @@ public class LLIndexList<E> implements IndexList<E> {
 
 	/**
 		Determines the size of the list. 
-		@return size of the list – number of elements. 
+		@return size of the list ï¿½ number of elements. 
 	 **/
 	public int size() { 
 		return internalLL.length(); 
@@ -57,7 +59,7 @@ public class LLIndexList<E> implements IndexList<E> {
 		@param e the new element to insert. 
 		@throws IndexOutOfBoundsException if the index
 			i does not corresponds to the index 
-			of a valid position to insert…
+			of a valid position to insertï¿½
 	 **/ 
 	public void add(int index, E e) 
 	throws IndexOutOfBoundsException 
@@ -120,6 +122,26 @@ public class LLIndexList<E> implements IndexList<E> {
 		ntc.setElement(e); 
 		return etr; 
 	}
-	
+	public Object[] toArray() {
+		 		Object[] array = new Object[this.size()]; 
+		 	    for (int i = 0; i<this.size(); i++) {
+		 	        array[i] = this.get(i);
+		 	    }
+		 	    return array;	
+		 	}
+		 
+		 
+		 	public <T1> T1[] toArray(T1[] array) {
+		 		if (array.length < this.size()) { 
+		 	    	array = (T1[]) Array.newInstance(array.getClass().getComponentType(), this.size());
+		 	    } else if (array.length > this.size()) 
+		 	    	for (int j=this.size(); j< array.length; j++) 
+		 	    		array[j] = null;
+		 	    
+		 	    for (int i = 0; i<this.size(); i++) {
+		 	    	array[i] = (T1) this.get(i);
+		 	    }
+		 	    return array;	
+		 	}
 
 }
