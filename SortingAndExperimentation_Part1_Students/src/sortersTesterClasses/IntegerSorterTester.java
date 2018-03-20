@@ -13,15 +13,20 @@ public class IntegerSorterTester {
 	//private static Sorter<Integer> sorter; 
 	private static Random rnd; 
 	private static ArrayList<Sorter<Integer>> sortersList = new ArrayList<>(); 
+	static Sorter<Entero> enteroSorter;
+	
+	
 	
 	public static void main(String[] args) { 
 		sortersList.add(new BubbleSortSorter<Integer>()); 
 		sortersList.add(new SelectionSortSorter<Integer>()); 
 		sortersList.add(new InsertionSortSorter<Integer>()); 
+		enteroSorter = new BubbleSortSorter<Entero>();
 		
 		test("Sorting Using Default Comparator<Integer>", null); 
 		test("Sorting Using IntegerComparator1", new IntegerComparator1()); 
 		test("Sorting Using IntegerComparator2", new IntegerComparator2()); 
+		testEntero("Sorting using Default Comparator<Entero>", null);
 	}
 	
 	private static void test(String msg, Comparator<Integer> cmp) { 
@@ -45,6 +50,34 @@ public class IntegerSorterTester {
 			}
 		}
 	}
+	
+	
+	
+	 private static void testEntero(String msg, Comparator<Entero> cmp) { 
+			
+
+			System.out.println("\n\n*******************************************************");
+			System.out.println("*** " + msg + "  ***");
+			System.out.println("*******************************************************");
+			
+			Entero[] original, arr; 
+			// generate random arrays is size i and test...
+			for (int i=1; i<=20; i += 5) { 
+				original = randomValuesEntero(i);
+				showEnteroArray("\n ---Original array of size " + i + " to sort:", original); 
+				
+				for (int s=0; s<sortersList.size(); s++) {
+					Sorter<Integer> sorter = sortersList.get(s); 
+				    arr = original.clone(); 
+				    enteroSorter.sort(arr, cmp);
+				    showEnteroArray(sorter.getName() + ": ", arr); 
+				}}
+		
+		
+		
+	}
+	
+	
 
 	private static void showArray(String msg, Integer[] a) {
 		System.out.print(msg); 
@@ -52,7 +85,18 @@ public class IntegerSorterTester {
 			System.out.print("\t" + a[i]); 
 		System.out.println();
 	}
+	
+	
+	
+	  private static void showEnteroArray(String msg, Entero[] original) {
+			System.out.print(msg); 
+			for (int i=0; i<original.length; i++) 
+				System.out.print("\t" + original[i]); 
+			System.out.println();
+		}
 
+	  
+	  
 	private static Integer[] randomValues(int i) {
 		Integer[] a = new Integer[i]; 
 		for (int j=0; j<i; j++) 
@@ -60,4 +104,18 @@ public class IntegerSorterTester {
 		return a;
 	}
 
+	   
+    private static Entero[] randomValuesEntero(int i) {
+		
+		Entero[] e = new Entero[i];
+		for (int j=0; j<i; j++) 
+			{
+			e[j] = new Entero(rnd.nextInt(100));
+		    
+			}
+		return e;
+	}
+	
+	
+	
 }
