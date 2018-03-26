@@ -16,13 +16,13 @@ public class SLLStack<E> implements Stack<E>
 	
 	public E pop() {
 		if (isEmpty())
-			return null; 
-		
+			{return null; }
+		return null;
 		// ADD CODE TO COMPLETE IMPLEMENTATION
 		
-		ntr.clean(); 
+		//ntr.clean(); 
 		
-		return etr;
+		//return etr;
 	}
 
 	public void push(E e) {
